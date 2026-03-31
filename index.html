@@ -3,52 +3,835 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ScanFix AI</title>
+  <title>ScanFix AI | Diagnóstico vehicular fácil</title>
+  <meta
+    name="description"
+    content="ScanFix AI te ayuda a entender de forma fácil el diagnóstico de tu vehículo con asistencia AI, lectura de códigos y una experiencia moderna."
+  />
   <style>
+    :root {
+      --bg: #050816;
+      --bg-2: #0b1229;
+      --card: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.12);
+      --text: #ffffff;
+      --muted: #b9c3d9;
+      --blue: #21c8ff;
+      --blue-2: #0ea5e9;
+      --red: #ff3b4d;
+      --red-2: #ff5c6c;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      --max: 1200px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #050816, #0a1630);
-      color: white;
-      text-align: center;
-      padding: 60px 20px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255, 59, 77, 0.16), transparent 30%),
+        radial-gradient(circle at top right, rgba(33, 200, 255, 0.18), transparent 32%),
+        linear-gradient(135deg, var(--bg), var(--bg-2));
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(5, 8, 22, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .brand-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--red), var(--blue));
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    .brand-name {
+      font-size: 1.05rem;
+    }
+
+    .brand-name span {
+      color: var(--blue);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .nav a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--text);
+    }
+
+    .cta-nav {
+      padding: 11px 16px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--blue), var(--blue-2));
+      color: #fff !important;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 84px 0 46px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 999px;
+      color: #e9eefb;
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--red), var(--blue));
+      box-shadow: 0 0 16px rgba(33, 200, 255, 0.65);
     }
 
     h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
+      margin: 0 0 18px;
+      font-size: clamp(2.5rem, 6vw, 4.8rem);
+      line-height: 0.95;
+      letter-spacing: -1.5px;
     }
 
-    p {
-      font-size: 1.2rem;
+    h1 .accent {
+      color: var(--blue);
+    }
+
+    .hero p {
+      margin: 0;
+      font-size: 1.1rem;
+      line-height: 1.75;
+      color: var(--muted);
       max-width: 700px;
-      margin: 0 auto 20px;
-      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
     }
 
     .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 14px 28px;
-      background: #00bfff;
-      color: white;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 22px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
     }
 
     .btn:hover {
-      background: #0099cc;
+      transform: translateY(-2px);
+      opacity: 0.98;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), var(--blue-2));
+      box-shadow: var(--shadow);
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .stat {
+      min-width: 160px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .visual-card {
+      position: relative;
+      border-radius: 30px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)),
+        rgba(8, 12, 28, 0.9);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      overflow: hidden;
+    }
+
+    .visual-glow {
+      position: absolute;
+      inset: auto auto 0 -60px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(255, 59, 77, 0.35), transparent 65%);
+      pointer-events: none;
+    }
+
+    .visual-glow.right {
+      inset: -40px -50px auto auto;
+      background: radial-gradient(circle, rgba(33, 200, 255, 0.38), transparent 65%);
+    }
+
+    .mock-screen {
+      border-radius: 22px;
+      padding: 24px;
+      background:
+        linear-gradient(135deg, rgba(255, 59, 77, 0.12), rgba(33, 200, 255, 0.14)),
+        #07101f;
+      border: 1px solid rgba(255,255,255,0.08);
+      min-height: 520px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screen-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      gap: 12px;
+    }
+
+    .signal {
+      display: flex;
+      gap: 8px;
+    }
+
+    .signal span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+    }
+
+    .signal span:nth-child(1) { background: var(--red); }
+    .signal span:nth-child(2) { background: #ffd166; }
+    .signal span:nth-child(3) { background: var(--blue); }
+
+    .screen-label {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .logo-box {
+      margin-top: 8px;
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .logo-word {
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      font-weight: 800;
+      text-align: center;
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+    }
+
+    .logo-word .fix {
+      color: var(--blue);
+    }
+
+    .scan-lines {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .scan-line {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      font-size: 0.95rem;
+    }
+
+    .scan-line strong {
+      color: #fff;
+    }
+
+    .scan-line span {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(33, 200, 255, 0.1);
+      border: 1px solid rgba(33, 200, 255, 0.28);
+      color: #d8f7ff;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    section {
+      padding: 34px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 12px;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      letter-spacing: -0.8px;
+    }
+
+    .section-text {
+      text-align: center;
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0 auto 32px;
+      line-height: 1.75;
+      font-size: 1.03rem;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 1.35rem;
+      background: linear-gradient(135deg, rgba(255, 59, 77, 0.16), rgba(33, 200, 255, 0.18));
+      border: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 16px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.98rem;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .about .card p + p {
+      margin-top: 12px;
+    }
+
+    .made-pr {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      font-weight: 700;
+      margin-top: 18px;
+    }
+
+    .flag {
+      font-size: 1.25rem;
+    }
+
+    .faq {
+      display: grid;
+      gap: 14px;
+    }
+
+    details {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 12px 0 0;
+    }
+
+    .cta {
+      padding: 26px 0 70px;
+    }
+
+    .cta-box {
+      text-align: center;
+      padding: 38px 22px;
+      border-radius: 30px;
+      background:
+        linear-gradient(135deg, rgba(255, 59, 77, 0.12), rgba(33, 200, 255, 0.14)),
+        rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .cta-box h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+    }
+
+    .cta-box p {
+      margin: 0 auto;
+      max-width: 760px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .store-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .store-btn {
+      min-width: 220px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 0 0 36px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 1050px) {
+      .hero-grid,
+      .about,
+      .features {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 52px;
+      }
+
+      .hero-grid,
+      .about,
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .mock-screen {
+        min-height: auto;
+      }
+
+      h1 {
+        line-height: 1.02;
+      }
+
+      .section-text,
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .topbar-inner {
+        padding: 14px 0;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>ScanFix AI</h1>
-  <p>Creado por manos puertorriqueñas.</p>
-  <p>
-    Nuestro objetivo es que toda persona pueda llegar a un entendimiento fácil
-    del diagnóstico de su vehículo.
-  </p>
-  <a class="btn" href="#">Próximamente</a>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="#" class="brand">
+        <div class="brand-badge">SF</div>
+        <div class="brand-name">Scan<span>Fix AI</span></div>
+      </a>
+
+      <nav class="nav">
+        <a href="#beneficios">Beneficios</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#preguntas">Preguntas</a>
+        <a href="#descarga" class="cta-nav">Próximamente</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Creado por manos puertorriqueñas
+          </div>
+
+          <h1>
+            Entiende el diagnóstico de tu vehículo de forma
+            <span class="accent">fácil</span>.
+          </h1>
+
+          <p>
+            ScanFix AI nace con mucho amor y dedicación para ayudarte a comprender
+            mejor lo que ocurre con tu carro. Nuestro objetivo es que cualquier
+            persona pueda ver códigos, entender posibles problemas y sentirse más
+            segura al momento de tomar decisiones.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#descarga">Ver lanzamiento</a>
+            <a class="btn btn-secondary" href="#nosotros">Conocer más</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>Asistencia AI</strong>
+              <span>Explicaciones claras y rápidas</span>
+            </div>
+            <div class="stat">
+              <strong>Lectura de códigos</strong>
+              <span>Más fácil de entender</span>
+            </div>
+            <div class="stat">
+              <strong>Made in PR</strong>
+              <span>Desarrollado con visión boricua</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="visual-card">
+            <div class="visual-glow"></div>
+            <div class="visual-glow right"></div>
+
+            <div class="mock-screen">
+              <div class="screen-top">
+                <div class="signal">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="screen-label">Vista previa de ScanFix AI</div>
+              </div>
+
+              <div class="logo-box">
+                <div class="logo-word">Scan<span class="fix">Fix</span> AI</div>
+
+                <div class="scan-lines">
+                  <div class="scan-line">
+                    <strong>Código detectado</strong>
+                    <span>P0300</span>
+                  </div>
+                  <div class="scan-line">
+                    <strong>Posible causa</strong>
+                    <span>Fallo de encendido</span>
+                  </div>
+                  <div class="scan-line">
+                    <strong>Asistencia AI</strong>
+                    <span>Explicación sencilla</span>
+                  </div>
+                  <div class="scan-line">
+                    <strong>Próximo paso</strong>
+                    <span>Revisión recomendada</span>
+                  </div>
+                </div>
+
+                <div class="pill">Diagnóstico más claro para todos</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="beneficios">
+      <div class="container">
+        <h2 class="section-title">¿Qué ofrece ScanFix AI?</h2>
+        <p class="section-text">
+          Una experiencia moderna pensada para personas que quieren entender lo
+          básico de un diagnóstico vehicular sin sentirse perdidas entre términos
+          complicados.
+        </p>
+
+        <div class="features">
+          <article class="card">
+            <div class="icon">🔎</div>
+            <h3>Lectura de códigos</h3>
+            <p>
+              Visualiza códigos de falla y obtén una orientación más clara sobre
+              lo que podría estar pasando con tu vehículo.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">🤖</div>
+            <h3>Asistencia AI</h3>
+            <p>
+              Recibe apoyo para detectar posibles problemas con explicaciones
+              simples, naturales y fáciles de comprender.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">⚡</div>
+            <h3>Rápido y claro</h3>
+            <p>
+              La meta es ir al grano para que no tengas que pasar trabajo
+              entendiendo información técnica innecesaria.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="icon">📱</div>
+            <h3>Experiencia moderna</h3>
+            <p>
+              Una plataforma con enfoque visual, cómoda y pensada para una nueva
+              generación de diagnóstico vehicular.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="nosotros">
+      <div class="container">
+        <h2 class="section-title">Una marca con propósito</h2>
+        <p class="section-text">
+          ScanFix AI fue creado con la visión de acercar el mundo del diagnóstico
+          automotriz a la gente común, de una manera más humana, simple y útil.
+        </p>
+
+        <div class="about">
+          <article class="card">
+            <h3>Nuestra visión</h3>
+            <p>
+              Queremos que cualquier persona pueda llegar a un entendimiento fácil
+              del diagnóstico de su vehículo, sin depender por completo de términos
+              técnicos difíciles de interpretar.
+            </p>
+            <p>
+              No se trata solo de mostrar códigos. Se trata de ayudarte a entender
+              qué significan y qué decisiones podrías considerar.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Raíces puertorriqueñas</h3>
+            <p>
+              Este proyecto nace en Puerto Rico con mucho amor, dedicación y deseo
+              de crear algo útil, moderno y con potencial real para ayudar a miles
+              de personas.
+            </p>
+            <div class="made-pr">
+              <span class="flag">🇵🇷</span>
+              Made in PR
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="preguntas">
+      <div class="container">
+        <h2 class="section-title">Preguntas frecuentes</h2>
+        <p class="section-text">
+          Esta sección te ayuda a comunicar mejor la marca mientras sigues
+          desarrollando la app y el ecosistema del producto.
+        </p>
+
+        <div class="faq">
+          <details>
+            <summary>¿Qué es ScanFix AI?</summary>
+            <p>
+              Es una propuesta enfocada en hacer más fácil la comprensión del
+              diagnóstico vehicular mediante lectura de información y asistencia AI.
+            </p>
+          </details>
+
+          <details>
+            <summary>¿La app reemplaza a un mecánico?</summary>
+            <p>
+              No. La intención es orientar y ayudar a entender mejor la información
+              del vehículo. Las reparaciones y evaluaciones finales siempre deben
+              confirmarse de forma responsable.
+            </p>
+          </details>
+
+          <details>
+            <summary>¿Estará disponible para App Store y Google Play?</summary>
+            <p>
+              Sí, la visión de la marca es lanzar una experiencia moderna para
+              múltiples plataformas.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="descarga">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Próximamente disponible</h2>
+          <p>
+            Estamos trabajando para llevar ScanFix AI a un nuevo nivel. Muy pronto
+            podrás conocer más sobre el lanzamiento, novedades y disponibilidad de
+            la plataforma.
+          </p>
+
+          <div class="store-buttons">
+            <div class="store-btn"> Próximamente en App Store</div>
+            <div class="store-btn">▶ Próximamente en Google Play</div>
+          </div>
+
+          <div class="hero-actions" style="justify-content:center; margin-top:24px;">
+            <a class="btn btn-primary" href="#">Solicitar información</a>
+            <a class="btn btn-secondary" href="#">Ver actualizaciones</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 ScanFix AI · Creado por manos puertorriqueñas.
+    </div>
+  </footer>
 </body>
 </html>
