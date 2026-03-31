@@ -6,7 +6,7 @@
   <title>ScanFix AI | Diagnóstico vehicular fácil</title>
   <meta
     name="description"
-    content="ScanFix AI te ayuda a entender de forma fácil el diagnóstico de tu vehículo con asistencia AI, lectura de códigos y una experiencia moderna."
+    content="ScanFix AI te ayuda a entender el diagnóstico de tu vehículo de forma fácil con asistencia AI, lectura de códigos y una experiencia moderna."
   />
   <style>
     :root {
@@ -26,7 +26,6 @@
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -60,7 +59,7 @@
       top: 0;
       z-index: 100;
       backdrop-filter: blur(14px);
-      background: rgba(5, 8, 22, .7);
+      background: rgba(5, 8, 22, .72);
       border-bottom: 1px solid rgba(255,255,255,.06);
     }
 
@@ -127,7 +126,7 @@
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.08fr .92fr;
+      grid-template-columns: 1.05fr .95fr;
       gap: 34px;
       align-items: center;
     }
@@ -413,6 +412,67 @@
       font-size: .97rem;
     }
 
+    .product-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .scanner-box,
+    .qr-box {
+      height: 100%;
+    }
+
+    .scanner-frame {
+      border-radius: 24px;
+      background:
+        linear-gradient(135deg, rgba(255,61,79,.10), rgba(25,194,255,.14)),
+        rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      padding: 24px;
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scanner-frame img {
+      max-height: 360px;
+      object-fit: contain;
+    }
+
+    .qr-placeholder {
+      width: 180px;
+      height: 180px;
+      border-radius: 20px;
+      border: 2px dashed rgba(255,255,255,.22);
+      display: grid;
+      place-items: center;
+      margin: 18px auto 14px;
+      color: var(--muted);
+      text-align: center;
+      padding: 16px;
+      background: rgba(255,255,255,.03);
+    }
+
+    .store-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .store-btn {
+      flex: 1 1 220px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--border);
+      font-weight: 700;
+      text-align: center;
+    }
+
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -487,23 +547,6 @@
       line-height: 1.75;
     }
 
-    .store-buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 24px;
-    }
-
-    .store-btn {
-      min-width: 230px;
-      padding: 16px 18px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid var(--border);
-      font-weight: 700;
-    }
-
     footer {
       text-align: center;
       padding: 0 0 38px;
@@ -514,6 +557,7 @@
     @media (max-width: 1050px) {
       .hero-grid,
       .grid-4,
+      .product-grid,
       .about-grid {
         grid-template-columns: 1fr 1fr;
       }
@@ -524,6 +568,7 @@
       .hero { padding-top: 54px; }
       .hero-grid,
       .grid-4,
+      .product-grid,
       .about-grid {
         grid-template-columns: 1fr;
       }
@@ -542,6 +587,7 @@
 
       <nav class="nav">
         <a href="#beneficios">Beneficios</a>
+        <a href="#scanner">Scanner</a>
         <a href="#nosotros">Nosotros</a>
         <a href="#preguntas">Preguntas</a>
         <a href="#descarga" class="nav-cta">Próximamente</a>
@@ -571,7 +617,7 @@
 
           <div class="hero-actions">
             <a class="btn btn-primary" href="#descarga">Ver lanzamiento</a>
-            <a class="btn btn-secondary" href="#nosotros">Conocer más</a>
+            <a class="btn btn-secondary" href="#scanner">Ver scanner</a>
           </div>
 
           <div class="hero-stats">
@@ -642,37 +688,68 @@
           <article class="card">
             <div class="icon">🔎</div>
             <h3>Lectura de códigos</h3>
-            <p>
-              Visualiza códigos de falla y recibe una orientación más comprensible
-              sobre lo que podría estar pasando con tu vehículo.
-            </p>
+            <p>Visualiza códigos de falla y recibe una orientación más comprensible sobre tu vehículo.</p>
           </article>
 
           <article class="card">
             <div class="icon">🤖</div>
             <h3>Asistencia AI</h3>
-            <p>
-              Recibe apoyo para detectar posibles problemas con explicaciones
-              claras y fáciles de entender.
-            </p>
+            <p>Recibe apoyo para detectar posibles problemas con explicaciones claras y fáciles de entender.</p>
           </article>
 
           <article class="card">
             <div class="icon">⚡</div>
             <h3>Rápido y al grano</h3>
-            <p>
-              Menos palabras complicadas y más enfoque en ayudarte a entender lo
-              importante de forma directa.
-            </p>
+            <p>Menos palabras complicadas y más enfoque en ayudarte a entender lo importante.</p>
           </article>
 
           <article class="card">
             <div class="icon">📱</div>
             <h3>Experiencia moderna</h3>
-            <p>
-              Una marca con estilo tecnológico, visual atractivo y visión de
-              crecimiento para múltiples plataformas.
+            <p>Una marca con estilo tecnológico, visual atractivo y visión de crecimiento.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="scanner">
+      <div class="container">
+        <h2 class="section-title">El scanner y la app trabajando juntos</h2>
+        <p class="section-text">
+          ScanFix AI conecta el hardware con una experiencia digital moderna para que tengas acceso a información más clara y útil.
+        </p>
+
+        <div class="product-grid">
+          <article class="card scanner-box">
+            <h3>Scanner OBD</h3>
+            <p style="color: var(--muted); line-height: 1.75;">
+              Aquí puedes mostrar la imagen oficial de tu scanner. Súbela al repositorio y colócala como parte de la identidad visual de la marca.
             </p>
+
+            <div class="scanner-frame" style="margin-top: 18px;">
+              <img src="scanner.png" alt="Scanner ScanFix AI" />
+            </div>
+          </article>
+
+          <article class="card qr-box">
+            <h3>Descarga la app</h3>
+            <p style="color: var(--muted); line-height: 1.75;">
+              Añade aquí tu código QR oficial para que las personas puedan acceder rápidamente a la descarga o a más información del producto.
+            </p>
+
+            <div class="qr-placeholder">
+              Espacio para tu QR de descarga
+            </div>
+
+            <div class="store-buttons">
+              <div class="store-btn"> Próximamente en App Store</div>
+              <div class="store-btn">▶ Próximamente en Google Play</div>
+            </div>
+
+            <div class="hero-actions" style="margin-top: 18px;">
+              <a class="btn btn-primary" href="#descarga">Solicitar información</a>
+              <a class="btn btn-secondary" href="#preguntas">Más detalles</a>
+            </div>
           </article>
         </div>
       </div>
@@ -682,28 +759,24 @@
       <div class="container">
         <h2 class="section-title">Una marca con propósito</h2>
         <p class="section-text">
-          ScanFix AI nace para acercar el mundo del diagnóstico automotriz a la
-          gente común, de una forma más humana, moderna y útil.
+          ScanFix AI nace para acercar el mundo del diagnóstico automotriz a la gente común, de una forma más humana, moderna y útil.
         </p>
 
         <div class="about-grid">
           <article class="card">
             <h3>Nuestra misión</h3>
-            <p>
-              Queremos que cualquier persona pueda entender mejor la información
-              de su vehículo sin sentirse perdida entre términos técnicos.
+            <p style="color: var(--muted); line-height: 1.75;">
+              Queremos que cualquier persona pueda entender mejor la información de su vehículo sin sentirse perdida entre términos técnicos.
             </p>
-            <p>
-              No se trata solo de mostrar códigos, sino de dar una guía más clara
-              para ayudar a tomar decisiones con mayor seguridad.
+            <p style="color: var(--muted); line-height: 1.75;">
+              No se trata solo de mostrar códigos, sino de dar una guía más clara para ayudar a tomar decisiones con mayor seguridad.
             </p>
           </article>
 
           <article class="card">
             <h3>Orgullo puertorriqueño</h3>
-            <p>
-              Este proyecto fue creado con mucho amor y dedicación, con la visión
-              de desarrollar una marca fuerte, útil y con identidad propia.
+            <p style="color: var(--muted); line-height: 1.75;">
+              Este proyecto fue creado con mucho amor y dedicación, con la visión de desarrollar una marca fuerte, útil y con identidad propia.
             </p>
             <div class="made-pr">🇵🇷 Made in PR</div>
           </article>
@@ -715,34 +788,23 @@
       <div class="container">
         <h2 class="section-title">Preguntas frecuentes</h2>
         <p class="section-text">
-          Una sección simple para presentar la visión del proyecto mientras sigues
-          desarrollando la app y su ecosistema.
+          Una sección simple para presentar la visión del proyecto mientras sigues desarrollando la app y su ecosistema.
         </p>
 
         <div class="faq">
           <details>
             <summary>¿Qué es ScanFix AI?</summary>
-            <p>
-              Es una marca enfocada en ayudar a entender mejor el diagnóstico
-              vehicular mediante lectura de información y asistencia AI.
-            </p>
+            <p>Es una marca enfocada en ayudar a entender mejor el diagnóstico vehicular mediante lectura de información y asistencia AI.</p>
           </details>
 
           <details>
             <summary>¿Reemplaza a un mecánico?</summary>
-            <p>
-              No. Su función es orientar y ayudar a comprender mejor lo que
-              indica el vehículo. Las reparaciones siempre deben confirmarse de
-              manera responsable.
-            </p>
+            <p>No. Su función es orientar y ayudar a comprender mejor lo que indica el vehículo. Las reparaciones siempre deben confirmarse de manera responsable.</p>
           </details>
 
           <details>
             <summary>¿Estará disponible para App Store y Google Play?</summary>
-            <p>
-              Sí. La visión es lanzar una experiencia moderna con presencia en
-              múltiples plataformas.
-            </p>
+            <p>Sí. La visión es lanzar una experiencia moderna con presencia en múltiples plataformas.</p>
           </details>
         </div>
       </div>
@@ -753,19 +815,12 @@
         <div class="cta-box">
           <h2>Próximamente disponible</h2>
           <p>
-            Estamos preparando el próximo paso para ScanFix AI. Muy pronto podrás
-            conocer más sobre el lanzamiento, actualizaciones y disponibilidad de
-            la plataforma.
+            Estamos preparando el próximo paso para ScanFix AI. Muy pronto podrás conocer más sobre el lanzamiento, actualizaciones y disponibilidad de la plataforma.
           </p>
 
           <div class="store-buttons">
             <div class="store-btn"> Próximamente en App Store</div>
             <div class="store-btn">▶ Próximamente en Google Play</div>
-          </div>
-
-          <div class="hero-actions" style="justify-content:center; margin-top:24px;">
-            <a class="btn btn-primary" href="#">Solicitar información</a>
-            <a class="btn btn-secondary" href="#">Ver actualizaciones</a>
           </div>
         </div>
       </div>
